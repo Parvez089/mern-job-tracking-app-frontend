@@ -16,13 +16,16 @@ const JobList = () => {
           setLoading(false);
           return;
         }
-        const res = await axios.get(`${API_BASE_URL}/api/jobs`,{
+        const res = await axios.get(`${API_BASE_URL}/api/jobs`, {
           headers: {
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         });
+
+
         setJobs(res.data.jobs);
         setLoading(false);
+
       } catch(error){
         console.error("Error fetching jobs:", error);
         setLoading(false);

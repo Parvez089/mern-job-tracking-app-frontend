@@ -22,8 +22,10 @@ const Register = ({ onRegisterSuccess }) => {
       });
 
       if(response.status === 201 && response.data.user){
-        onRegisterSuccess(response.data.user)
+        
+        localStorage.setItem("token", response.data.token);
         localStorage.setItem("user",JSON.stringify(response.data.user));
+        onRegisterSuccess(response.data.user)
          navigate("/");
       }
     }catch(err){
