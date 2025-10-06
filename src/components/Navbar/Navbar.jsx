@@ -4,17 +4,8 @@ import { Menu, X } from "lucide-react";
 
 const Navbar = ({user,handleLogout}) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const navigate = useNavigate();
-
-  //   const handleGetStarted = () => {
-  //     navigate("/login"); // redirect to login page
-  //   };
-  // const handleLoginSuccess = ()=>{
-  //   setIsLoggedIn(true);
-  //   navigate("/profile");
-  // }
 
   return (
     <div className='w-full shadow-md bg-white px-6 py-4'>
@@ -30,9 +21,11 @@ const Navbar = ({user,handleLogout}) => {
         <div className='hidden md:block'>
           {user ? (
             <div className='flex gap-8'>
-              <Link className='border-none outline-none bg-[#137FEC] rounded-lg px-3 py-1 text-white font-bold'>
+              <button
+                onClick={() => navigate("/dashboard")}
+                className='border-none outline-none bg-[#137FEC] rounded-lg px-3 py-1 text-white font-bold'>
                 {user.name}
-              </Link>
+              </button>
               <button
                 onClick={handleLogout}
                 className='border-none outline-none bg-red-500 rounded-lg px-3 py-1 text-white font-bold'>

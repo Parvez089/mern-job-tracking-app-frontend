@@ -1,5 +1,6 @@
 /** @format */
 
+import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -13,25 +14,30 @@ const Login = ({ onLoginSuccess }) => {
   const handleSubmit = async (e) => {
     e.preventDefault(); // prevent page reload
 
-    // -------------------------------
-    // TODO: Replace this with real API call
-    // Example fake API response:
-    const fakeApiResponse = {
-      success: true,
-      user: { name: "John Doe", email },
-    
-    };
-    // -------------------------------
+    try{
+      const API_BASE_URL = import.meta.env.VITE_API_URL;
+      const response = await axios.post(`${API_BASE_URL}/api/auth/login`,{
+        email,
+        password
+      });
 
-    if (fakeApiResponse.success) {
-      // Call parent function to update user state in App.js
-      onLoginSuccess(fakeApiResponse.user);
+      if(response.status === 200 && response.data.user && response.data.token){
+        localStorage.setItem("token", response.data.token)
 
-      // Redirect to profile page
-      navigate("/");
-    } else {
-      setError("Invalid email or password");
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+
+        onLoginSuccess(response.data.user);
+
+        navigate("/")
+      } else{
+        
+        setError("Invalid email or password");
+      }
+    }catch(err){
+      console.error(err);
+      setError(err.response?.data?.error || "Login failed. Try again.");
     }
+    
   };
 
   return (

@@ -9,7 +9,10 @@ const Login = ({ onLogin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${API_BASE_URL}/api/auth/login`);
+      const res = await axios.post(`${API_BASE_URL}/api/auth/login`, {
+        email,
+        password,
+      });
       const { token, user } = res.data;
       localStorage.setItem("token", token);
       onLogin(user);
