@@ -1,14 +1,21 @@
 /** @format */
-
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import { Home } from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Footer from "./components/Footer/Footer";
-import React, { useEffect, useState } from "react";
+
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Profile from "./pages/Profile";
+import DashboardHome from "./pages/DashboardHome";
+import Apply from "./pages/Apply";
+import Status from "./pages/Status";
+import Jobs from "./pages/Jobs";
+import Update from "./pages/Update";
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -44,7 +51,13 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
         <Route path='/contact' element={<Contact />} />
-        <Route path='/dashboard' />
+        <Route path='/dashboard' element={<Profile/>}>
+          <Route index element={<DashboardHome/>}/>
+          <Route path="apply" element={<Apply/>}/>
+          <Route path="status" element={<Status/>}/>
+          <Route path="jobs" element={<Jobs/>}/>
+          <Route path="update" element={<Update/>}/>
+        </Route>
       </Routes>
       <Footer />
     </div>
