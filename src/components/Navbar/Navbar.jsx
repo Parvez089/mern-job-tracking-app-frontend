@@ -22,7 +22,7 @@ const Navbar = ({user,handleLogout}) => {
           {user ? (
             <div className='flex gap-8'>
               <button
-                onClick={() => navigate("/dashboard")}
+                onClick={() => navigate(`/dashboard`)}
                 className='border-none outline-none bg-[#137FEC] rounded-lg px-3 py-1 text-white font-bold'>
                 {user.name}
               </button>

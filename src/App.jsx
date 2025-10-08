@@ -1,6 +1,6 @@
 /** @format */
 import React, { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import { Home } from "./pages/Home";
 import About from "./pages/About";
@@ -16,9 +16,9 @@ import Status from "./pages/Status";
 import Jobs from "./pages/Jobs";
 import Update from "./pages/Update";
 
-
 function App() {
   const [user, setUser] = useState(null);
+  const location = useLocation();
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -36,9 +36,13 @@ function App() {
     setUser(null);
     localStorage.removeItem("user");
   };
+
+  const hideNavbarFooter = location.pathname.startsWith("/dashboard");
+
   return (
     <div className='p-6 max-w-screen-xl mx-auto '>
-      <Navbar user={user} handleLogout={handleLogout} />
+      {!hideNavbarFooter && <Navbar user={user} handleLogout={handleLogout} />}
+
       <Routes>
         <Route
           path='/login'
@@ -51,15 +55,15 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
         <Route path='/contact' element={<Contact />} />
-        <Route path='/dashboard' element={<Profile/>}>
-          <Route index element={<DashboardHome/>}/>
-          <Route path="apply" element={<Apply/>}/>
-          <Route path="status" element={<Status/>}/>
-          <Route path="jobs" element={<Jobs/>}/>
-          <Route path="update" element={<Update/>}/>
+        <Route path='/dashboard' element={<Profile />}>
+          <Route index element={<DashboardHome />} />
+          <Route path='apply' element={<Apply />} />
+          <Route path='status' element={<Status />} />
+          <Route path='jobs' element={<Jobs />} />
+          <Route path='/dashboard/jobs/update/:id' element={<Update />} />
         </Route>
       </Routes>
-      <Footer />
+      {!hideNavbarFooter && <Footer />}
     </div>
   );
 }
