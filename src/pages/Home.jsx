@@ -9,11 +9,11 @@ import JobList from "./JobList";
 export const Home = () => {
   return (
     <div>
-     <Hero/>
-      <Feature/>
-      <Work/>
-       <JobList/>
-      <CTA/>
+      <Hero />
+      <Feature />
+      <Work />
+      {/* <JobList/> */}
+      <CTA />
     </div>
   );
 };
