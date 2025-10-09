@@ -62,9 +62,17 @@ const Login = ({ onLoginSuccess }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className='border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
+            autoComplete='current-password'
             required
           />
-          <p>have't account? <span className="cursor-pointer text-blue-500" onClick={()=> navigate("/register")}>Sign up</span></p>
+          <p>
+            have't account?{" "}
+            <span
+              className='cursor-pointer text-blue-500'
+              onClick={() => navigate("/register")}>
+              Sign up
+            </span>
+          </p>
 
           <button
             type='submit'
