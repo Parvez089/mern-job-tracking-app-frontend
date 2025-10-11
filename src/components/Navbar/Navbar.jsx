@@ -55,7 +55,7 @@ const Navbar = ({user,handleLogout}) => {
           <Link to='/contact'>Contact</Link>
           {user ? (
             <div className='flex gap-16'>
-              <Link>{user.name}</Link>
+              <Link to="/dashboard">{user.name}</Link>
               <button
                 onClick={handleLogout}
                 className='border-none outline-none bg-red-500 rounded-lg px-3 py-1 text-white font-bold'>
